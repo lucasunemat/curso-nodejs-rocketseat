@@ -22,11 +22,29 @@ import http from 'node:http';
 //req : obtém informações de quem está mandando a requisição
 //res : devolve resposta para quem fez a requisição
 
+const users = [];
+
 const server = http.createServer((req, res) => {
     const { method, url } = req; //desestruturando req e obtendo method e url dele
     console.log(method, url);
-    
-    return res.end('Hello OI!');
+
+    //JSON é variavel global do node
+    if (method === 'GET' && url === '/users') {
+        return res
+        .setHeader('Content-Type', 'application/json') //setando header da resposta indicando para o front que é um json | facilita o navegador a entender o que está sendo retornado e formatar
+        .end(JSON.stringify(users));
+    }
+
+    if (method === 'POST' && url === '/users') {
+        users.push({
+            id: 1,
+            name: 'John Doe',
+            email: 'johndoe@gmail.com'
+        })
+        return res.end('Criando usuários!');
+    }
+
+    return res.end('Hello World Misera!');
 })
 
 server.listen(3333);

@@ -22,6 +22,21 @@ AULA 4 - Rotas
 * Ao trabalhar com HTTP na requisição, temos dois pontos principais:
   * URL
   * Método usado
+* Métodos de requisição HTTP:
+  * GET - conseguir informações;
+  * PUT - atualização de várias informações;
+  * PATCH - atualização de informação específica;
+  * DELETE - adivinha?
+  * POST - inserir nova informação;
+* geralmente é Método + URL 
+  => GET / meusite.com.br:3333/users => buscando usuarios
+  => POST/ meusite.com.br:3333/insert => criar um usuário
+
+AULA 5 - Statless e Statfull
+
+* Statfull depende de você ter informações salvas na memória para aplicação funcionar;
+* Statless salva não na memória, mas em bancos de dados externos (arquivos externos) e não precisa de dados da memoria atual para funcionar1
+* Cabeçalhos são metadados que podem ser usados para você dizer como o front deve interpretar dados retornados do backend
 
 COMANDOS
 
