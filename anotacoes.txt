@@ -1,0 +1,33 @@
+* Node = plataforma que permite rodar JS no lado do servidor;
+* Usa V8, engine do chrome para interpretar JS para contextos onde não estamos no browser;
+* Streming: input output non in block, a gente consegue realizar ações parciais sem precisar
+  interromper outras que estejam ocorrendo ao mesmo tempo;
+    * Certa concorrência de ações;
+* Ex: quando precisamos ler um arquivo csv grande
+    * Essa certa "concorrência" permite você ler e já ir tratando dados de pouco em pouco 
+      sem precisar ler um arquivo inteiro;
+
+AULA 1
+
+* packtage: nome, descrição, versão do node, dependencias externas;
+
+AULA 3 - Node Watch
+ 
+* Para criar atalhos: vai no packtage.json, na parte de scripts coloca "exComando": "--seu comando aqui"
+* Com isso, você pode só executar "npm run exComando" e pronto! Vai rodar...
+
+AULA 4 - Rotas
+
+* Rotas são formas de o cliente executar uma ação (remover, listar, inserir usuários)
+* Ao trabalhar com HTTP na requisição, temos dois pontos principais:
+  * URL
+  * Método usado
+
+COMANDOS
+
+* para usar es module: vá para package.json e adicione "type": "module"
+* npm init -y => pede para criar um arquivo padrão packtage.json sem ficar perguntando coisa;
+* node src/seuArquivo.js  (exemplo) : serve para executar o arquivo que é ums server
+  * Enquanto estiver escutando, vai responder o que tá nas funções
+* node --watch src/seuArquivo.js deixar node reiniciando servidor e captar mudanças
+
