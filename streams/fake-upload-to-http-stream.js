@@ -1,6 +1,6 @@
 import { Readable } from 'node:stream';
 
-class OneToHundredStrem extends Readable {
+class OneToHundredStream extends Readable {
     index = 1;
 
     _read() {
@@ -29,5 +29,6 @@ class OneToHundredStrem extends Readable {
 //A partir de agora essa OneToHundredStrem é um readable stream que será representada pelo "req" lá no meu arquivo stream-http-server.js
 fetch('http://localhost:3334', {
     method: 'POST',
-    body: new OneToHundredStrem(),
+    body: new OneToHundredStream(),
+    duplex: 'half' // adicione essa linha
 })
