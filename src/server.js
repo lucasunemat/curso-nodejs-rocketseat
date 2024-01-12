@@ -39,12 +39,13 @@ const server = http.createServer((req, res) => {
         users.push({
             id: 1,
             name: 'John Doe',
-            email: 'johndoe@gmail.com'
+            email: 'johndoe@gmail.com!'
         })
-        return res.end('Criando usuários!');
+        return res.writeHead(201).end('Criando usuários!');
+        //CRIOU algo com sucessso = 201. Usamos writeHead para escrever o cabeçalho da resposta
     }
 
-    return res.end('Hello World Misera!');
+    return res.writeHead(404).end(); //aqui eu tô falando pra tipo, se não cair em nenhuma das rotas (ifs) executar isso (404 - not found)
 })
 
 server.listen(3333);

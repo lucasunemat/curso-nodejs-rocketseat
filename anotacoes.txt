@@ -46,3 +46,16 @@ COMANDOS
   * Enquanto estiver escutando, vai responder o que tá nas funções
 * node --watch src/seuArquivo.js deixar node reiniciando servidor e captar mudanças
 
+HTTP STATUS CODES
+
+* Comunicação ao front end se as requisições deram certo e se não, qual o motivo do erro para tratamento;
+* Lista
+  * 100 - 199 = informações gerais
+  * 200 - 299 = mensagens de sucesso variadas
+  * 300 - 499 = mensagens de redirecionamento (301=redirecionado definitivo, 302=redirecionado temporario)
+    * Requisições para rotas que não existem mais e foram colocadas novas rotas no lugar
+  * 400 - 599 = erro client (informado algo de forma errada no front end)
+    * client = o front que faz a requisição
+  * 500 - 599 = server error (algo de errado no back-end, não é erro de client)
+  
+
