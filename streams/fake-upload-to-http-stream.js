@@ -20,3 +20,14 @@ class OneToHundredStrem extends Readable {
 
     }
 }
+
+/**
+ * Quando to trabalhando com readable streams, eu tenho que usar ou post ou put
+ * Isso porque ela está lendo os dados do usuário e mandndo para o backend
+ */
+
+//A partir de agora essa OneToHundredStrem é um readable stream que será representada pelo "req" lá no meu arquivo stream-http-server.js
+fetch('http://localhost:3334', {
+    method: 'POST',
+    body: new OneToHundredStrem(),
+})

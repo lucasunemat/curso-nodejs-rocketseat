@@ -78,8 +78,6 @@ class InverseNumberStream extends Transform {
         //aqui o primeiro parametro é o erro, e o segundo é o dado transformado
         callback(null, Buffer.from(String(transformed)));
     }
-
-
 }
 
 /**
