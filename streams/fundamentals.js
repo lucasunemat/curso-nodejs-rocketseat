@@ -44,7 +44,7 @@
  * Vamos criar uma stream do zero, aqui
  */
 
-import { Readable } from 'node:stream';
+import { Readable, Writable, Transform } from 'node:stream';
 
 class OneToHundredStrem extends Readable {
     index = 1;
@@ -60,11 +60,48 @@ class OneToHundredStrem extends Readable {
                 this.push(null);
             } else { //aqui é tipo o que eu quero mostrar no stdout, o que ta sendo processado por ele
                 const buf = Buffer.from(String(i)) //envio a informação que quero mostrar no stdout convertida em string (buffer só aceita string)
-                this.push(buf)
+                this.push(buf) //isso é um chunk (pedaço) de informação que estou enviando para o stdout
             }
         }, 500)
 
     }
 }
+/*pipe é o que conecta uma stream com outra
+ *process.stdout é uma stream writable
+ */
+//new OneToHundredStrem().pipe(process.stdout); 
 
-new OneToHundredStrem().pipe(process.stdout); //pipe é o que conecta uma stream com outra
+class InverseNumberStream extends Transform {
+    _transform(chunk, encoding, callback) {
+        const transformed = Number(chunk.toString()) * -1;
+
+        //aqui o primeiro parametro é o erro, e o segundo é o dado transformado
+        callback(null, Buffer.from(String(transformed)));
+    }
+
+
+}
+
+/**
+ * Na _write (função obrigatoria de stream de escrita) temos
+ * chunk = pedaço de informação que está sendo enviado
+ * encoding = tipo de codificação dos dados
+ * callback = função que deve ser chamada quando a escrita for finalizada
+ */
+
+class MultiplyByTenStream extends Writable {
+    //stream só processa, não transforma o dado (????)
+    _write(chunk, encoding, callback){
+        console.log(Number(chunk.toString()) * 10)
+        callback();
+    }
+}
+
+new OneToHundredStrem()
+.pipe(new InverseNumberStream()) //transform é sempre usada no intermeio, ela precisa receber de uma de leitura e escrever numva de escrita
+.pipe(new MultiplyByTenStream()); //aqui eu to conectando a readable stream com a writable stream
+
+/**
+ * String duplex: ela é tanto readable quanto writable
+ * Tipo um arquivo do nosso sistema, a gente pode sempre escrever ou ler o arquivo, mas transformação não é algo que fazemos ele
+ */
