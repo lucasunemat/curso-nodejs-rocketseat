@@ -8,7 +8,7 @@ class OneToHundredStream extends Readable {
 
         //esse setTimeouts
         setTimeout(() => {
-            if (i > 100) {
+            if (i > 10) {
                 //push serve readable streamfornecer informações para quem estiver consumindo
                 //ao enviar nulo digo que nao tenho mais info para enviar
                 this.push(null);
@@ -16,7 +16,7 @@ class OneToHundredStream extends Readable {
                 const buf = Buffer.from(String(i)) //envio a informação que quero mostrar no stdout convertida em string (buffer só aceita string)
                 this.push(buf) //isso é um chunk (pedaço) de informação que estou enviando para o stdout
             }
-        }, 500)
+        }, 1000)
 
     }
 }
@@ -31,4 +31,8 @@ fetch('http://localhost:3334', {
     method: 'POST',
     body: new OneToHundredStream(),
     duplex: 'half' // adicione essa linha
-})
+}).then(response => {
+    return response.text()
+}).then(data => console.log(data))
+
+//esse tratamento de dados que termina em console.log() é o que faz aparecer os numeros para o meu front
