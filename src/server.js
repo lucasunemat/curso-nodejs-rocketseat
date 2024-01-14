@@ -16,7 +16,7 @@
 // mostrar que trata-se de módulo interno, e não framework de terceiro
 
 import http from 'node:http';
-
+import { json } from './middlewares/json.js';
 //criando servidor e colocando para ouvir na porta localhost:3333
 //ao chamar esse endereço vai cair na função de callback
 //req : obtém informações de quem está mandando a requisição
@@ -27,21 +27,15 @@ const users = [];
 const server = http.createServer(async (req, res) => {
     const { method, url } = req; //desestruturando req e obtendo method e url dele
 
-    //crio um array de buffers (to usando isso porque quero dar um console log no body da requisição no terminal)
-    const buffers = [];
-
-    //juntando todos os pedaços que vieram da req (chunks)
-    for await (const chunk of req) {
-        buffers.push(chunk);
-    }
-
-    try {
-        //se tem body, cria uma var body e  converte para string e depois para json e joga na req.body
-        req.body = JSON.parse(Buffer.concat(buffers).toString());
-    } catch {
-        //se não tem body, seta como null
-        req.body = null;
-    }
+    /*chamando middleware json.js
+     * a função dele é pegar o req e incluir o req.body com o couteúdo da requisção em JSON (vide json.js)
+     * um middleware por definição é função que recebe req e res e faz alguma coisa com eles. Ele INTERCEPTA
+     * a requisição e faz alguma coisa com ela. Nesse caso, ele cria uma nova var (req.body) e inclui o corpo
+     * da requisição e converte ele para JSON
+     * no caso esse middleware é GLOBAL. Ele vai valer para todas as rotas (então o res.setHeader('Content-Type',
+     * 'application/json') vai valer para todas as rotas
+    */
+    await json(req, res);
 
     //isso aqui faz aparecer o "POST /users" no terminal 
     console.log(method, url);
@@ -49,7 +43,6 @@ const server = http.createServer(async (req, res) => {
     //JSON é variavel global do node
     if (method === 'GET' && url === '/users') {
         return res
-            .setHeader('Content-Type', 'application/json') //setando header da resposta indicando para o front que é um json | facilita o navegador a entender o que está sendo retornado e formatar
             .end(JSON.stringify(users));
     }
 
