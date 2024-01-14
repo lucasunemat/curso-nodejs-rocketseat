@@ -36,8 +36,8 @@ const server = http.createServer(async (req, res) => {
     }
 
     try {
-        //se tem body, converte para string e depois para json
-        req.body = JSON(Buffer.concat(buffers).toString());
+        //se tem body, cria uma var body e  converte para string e depois para json e joga na req.body
+        req.body = JSON.parse(Buffer.concat(buffers).toString());
     } catch {
         //se não tem body, seta como null
         req.body = null;
@@ -54,7 +54,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (method === 'POST' && url === '/users') {
-        const { name, email } = body;
+        const { name, email } = req.body;
 
         users.push({
             id: 1,
