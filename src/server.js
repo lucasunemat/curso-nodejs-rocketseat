@@ -17,10 +17,13 @@
 
 import http from 'node:http';
 import { json } from './middlewares/json.js';
+import { Database } from './database.js';
 //criando servidor e colocando para ouvir na porta localhost:3333
 //ao chamar esse endereço vai cair na função de callback
 //req : obtém informações de quem está mandando a requisição
 //res : devolve resposta para quem fez a requisição
+
+const database = new Database();
 
 const users = [];
 
@@ -42,6 +45,8 @@ const server = http.createServer(async (req, res) => {
 
     //JSON é variavel global do node
     if (method === 'GET' && url === '/users') {
+        const users = database.select('users');
+
         return res
             .end(JSON.stringify(users));
     }
@@ -49,12 +54,17 @@ const server = http.createServer(async (req, res) => {
     if (method === 'POST' && url === '/users') {
         const { name, email } = req.body;
 
-        users.push({
+        //cria objeto com os dados do usuário
+        const user = {
             id: 1,
             name, //to adicionando o nome que veio da requisição. é o mesmo que colocar name: name
             email,
-        })
-        return res.writeHead(201).end('Criando usuários!');
+        }
+
+        //cria uma chave "users" que vai ser um array de objetos com dados dos usuários
+        database.insert('users', user);
+
+        return res.writeHead(201).end('Usuário criado!');
         //CRIOU algo com sucessso = 201. Usamos writeHead para escrever o cabeçalho da resposta
     }
 

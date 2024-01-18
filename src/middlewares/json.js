@@ -20,5 +20,5 @@ export async function json(req, res) {
      * No contexto desse middleware, ele faz a função de sempre indicar ao navegador que o que está sendo
      * enviado é JSON sempre que ele é invocado
      */
-    req.setHeader('Content-Type', 'application/json')
+    res.setHeader('Content-Type', 'application/json')
 }
