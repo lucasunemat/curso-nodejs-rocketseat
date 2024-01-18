@@ -1,20 +1,38 @@
 import fs from 'node:fs/promises';
 
+/**
+ * O método constructor() é necessário porque ele permite que a classe Database seja inicializada
+ * com um estado inicial. No caso específico desse arquivo, o estado inicial é um objeto vazio que
+ * representa o banco de dados.
+ * Se você criasse uma função para ler os dados do arquivo db.json, você não teria como inicializar
+ * o banco de dados. Você teria que passar o objeto vazio para a função como um argumento, o que
+ * tornaria o código menos conciso e mais difícil de entender.
+ * Além disso, uma função para ler os dados do arquivo db.json não seria capaz de armazenar os dados
+ * em um estado interno. Isso significaria que você teria que passar o objeto de dados para todas as
+ * funções que precisam acessá-lo, o que tornaria o código mais complexo e menos eficiente.
+ */
+
+
 //configurando o caminho do arquivo db.json 
 const databasePath = new URL('../db.json', import.meta.url);
 
 export class Database {
-    //propriedade database que é um objeto vazio
+    //propriedade database que é um objeto vazio, é o estado inicial do banco de dados
     //o # faz ser prop privada impossivel de ser acessada livremente fora da classe Database
     //teste alteração
     #database = {}; 
 
     //ao iniciar aplicação, precisamos recuperar os dados do arquivo db.json no formato do banco
     constructor() {
-        fs.readFile(databsePath, 'utf8').then(data => {
+        fs.readFile(databasePath, 'utf8').then(data => {
             // JSON.parse transforma o JSON em objeto
             this.#database = JSON.parse(data);
         })
+        .catch(() => {
+            //se não tiver nada no arquivo, vai criar um objeto vazio
+            this.#persist();
+        })
+        
     }
 
     //aqui estou salvando as informações do banco de dados em um arquivo db.json
