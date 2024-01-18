@@ -1,5 +1,6 @@
 export class Database {
     //propriedade database que é um objeto vazio
+    //o # faz ser prop privada impossivel de ser acessada livremente fora da classe Database
     #database = {}; 
 
     select (table){
