@@ -15,6 +15,14 @@
 // importando o modulo htt.p com ES Module. colocamos "node" antes para 
 // mostrar que trata-se de módulo interno, e não framework de terceiro
 
+/**
+ * Utilizaremos o file system do node (fs)
+ * O node:fs/promises é uma versão do fs que retorna promises (permite usar
+ * fetch, .then etc)
+ * O node:fs é um pacote mais antigo que não retorna promises, mas tem os 
+ * métodos de streaming (readFile, writeFile etc)
+ */
+
 import http from 'node:http';
 import { json } from './middlewares/json.js';
 import { Database } from './database.js';
