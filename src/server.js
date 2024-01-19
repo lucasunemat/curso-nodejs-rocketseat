@@ -28,10 +28,12 @@
  * 1. Query Params: envia dados pela URL (ex. http://localhost:3333/users?name=Joao)
  * classico de URL statefull. Usado para informação não sensiveis que vão modificar a 
  * resposta do backend (por ex, a visualização de uma lista por meio de um filtro)
+ 
  * 2. Route Params: envia dados pela URL (ex. GET http://localhost:3333/users/1).
  * o 1 meio que é parte da url, e serve para identificar recurso (tipo os dados do
  * user com id 1). Você entende a ação por meio de do método GET, DELETE, PUT + url.
  * tambem não pode ser usado para dados sensiveis. Não é criptografado.
+ 
  * 3. Request Body: envia dados pelo corpo da requisição (ex. POST http://localhost:3333/users).
  * é o que usamos até aqui. É para envio de formulários. Mais seguro. Passam por HTTP 
  * e são criptografados. Ex: POST http://localhost:3333/users (url sem informações explicitas)

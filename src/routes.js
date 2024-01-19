@@ -33,6 +33,9 @@ export const routes = [
             return res.writeHead(201).end('Usuário criado!');
             //CRIOU algo com sucessso = 201. Usamos writeHead para escrever o cabeçalho da resposta
         }
+    },
+    {
+        method: 'DELETE',
+        path: '/users/{id}', //identificando recurso para deletar
     }
-
 ]
