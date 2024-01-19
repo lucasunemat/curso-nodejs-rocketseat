@@ -11,5 +11,9 @@ export function buildRoutePath(path) {
     // cada () é um subgrupo, uma busca dentro da busca
     const routeParametersRegex = /:([a-zA-Z]+)/g;
 
-    console.log(Array.from(path.matchAll(routeParametersRegex)));
+    // substitui o que der match pelo que está dentro do parênteses
+    const pathWithParams = path.replaceAll(routeParametersRegex, '([a-z0-9\-_])')
+
+    // indica que o caminho da rota deve começar com o pathWithParams
+    const pathRegex = new RegExp(`^${pathWithParams}`);
 }
