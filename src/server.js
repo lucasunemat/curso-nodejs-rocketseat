@@ -39,6 +39,18 @@
  * e são criptografados. Ex: POST http://localhost:3333/users (url sem informações explicitas)
  */
 
+/**
+ * Vetor retornado pelo .match():
+    [
+        '/users/c9ef080d-6df6-4371-a524-f49e02ca5698/groups/1', ---------------> url toda
+        'c9ef080d-6df6-4371-a524-f49e02ca5698',                 ---------------> o que deu match no primeiro grupo
+        '1',                                                    ---------------> o que deu match no segundo grupo
+        index: 0,
+        input: '/users/c9ef080d-6df6-4371-a524-f49e02ca5698/groups/1',
+        groups: undefined
+    ]
+ */
+
 import http from 'node:http';
 import { json } from './middlewares/json.js';
 import { routes } from './routes.js';
@@ -49,6 +61,8 @@ import { routes } from './routes.js';
 
 const server = http.createServer(async (req, res) => {
     const { method, url } = req; //desestruturando req e obtendo method e url dele
+
+    //console.log(url) --> url no caso do create é /users/
 
     /*chamando middleware json.js
      * a função dele é pegar o req e incluir o req.body com o couteúdo da requisção em JSON (vide json.js)
@@ -62,12 +76,22 @@ const server = http.createServer(async (req, res) => {
 
     //filtro para encontrar a rota no routes.js
     const route = routes.find(route => {
-        return route.method === method && route.path === url;
+        //o retorno da função buildRoutePath é uma regex, que pode testar urls e strings em geral com o método .test()
+        //ele retorna true ou false
+        // -- no caso de um post, preciso que a url bata com o método e com o path (/users/)
+        // -- no caso de um delete, preciso que a url bata com o método e com o path (/^\/users\/(?<id>[a-z0-9-_]+)/)
+        return route.method === method && route.path.test(url);
     })
 
     //se encontra a rota, executa o handler passando os parametros que ele precisa
     //tudo com apenas um if
     if (route) {
+        //verificando se a url aqui recebida bate com a regex da rota (que usa o path no lugar de url)
+        //o match() ao contrário do test() retorna um array com os parametros da url, retorna mais que true ou false
+        const routeParams = req.url.match(route.path)
+
+        console.log(routeParams);
+
         return route.handler(req, res);
     }
 

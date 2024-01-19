@@ -7,7 +7,7 @@ const database = new Database();
 export const routes = [
     {
         method: 'GET', //metodo
-        path: buildRoutePath('/users'), //caminho para chamar a rota
+        path: buildRoutePath('/users'), //caminho para chamar a rota, é a url
         //funcao que será executada
         handler: (req, res) => {
             const users = database.select('users')
@@ -17,7 +17,7 @@ export const routes = [
     },
     {
         method: 'POST',
-        path: buildRoutePath('/users'),
+        path: buildRoutePath('/users'), // retorna /^\/users/ (a mesma coisa que o que foi enviado)
         handler: (req, res) => {
             const { name, email } = req.body;
 
@@ -39,6 +39,7 @@ export const routes = [
         method: 'DELETE',
         path: buildRoutePath('/users/:id'), //identificando recurso para deletar
         handler: (req, res) => {
+            console.log(buildRoutePath('/users/:id')); //retorna /^\/users\/(?<id>[a-z0-9-_]+)/
             return res.end();
         }
     }
