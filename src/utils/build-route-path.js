@@ -22,7 +22,12 @@ export function buildRoutePath(path) {
     // indica que o caminho da rota deve começar com o pathWithParams (ou seja, após /users/, deve ter um id)
     // essa parte relativa a ^${pathWithParams} é dizendo o que vai vir depois do /users/
     // ou seja, no final, vai concatenar /users/ com ^${pathWithParams}
-    const pathRegex = new RegExp(`^${pathWithParams}`);
+    // o ? depois do () indica que o grupo é opcional
+    // o $ no final indica que depois da query é obrigatorio ser o final da string
+    // .* indica que pode ter qualquer caracter infinitas vezes após o ?
+    const pathRegex = new RegExp(`^${pathWithParams}(?<query>\\?(.*))?$`);
+
+    // /^(?<query>\\?(.*))?$/
 
     return pathRegex;
 }

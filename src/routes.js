@@ -36,6 +36,20 @@ export const routes = [
         }
     },
     {
+        method: 'PUT',
+        path: buildRoutePath('/users/:id'), //identificando recurso para deletar - //retorna /^\/users\/(?<id>[a-z0-9-_]+)/
+        handler: (req, res) => {
+            const { id } = req.params; //pegando id do usuário que veio da URL da requisicao
+            const { name, email } = req.body; //pegando dados do usuário que vieram do CORPO da requisição
+            database.update('users', id, {
+                name,
+                email,
+            });
+
+            return res.writeHead(204).end(); //204: deu certo mas não tem nada para retornar
+        }
+    },
+    {
         method: 'DELETE',
         path: buildRoutePath('/users/:id'), //identificando recurso para deletar - //retorna /^\/users\/(?<id>[a-z0-9-_]+)/
         handler: (req, res) => {
