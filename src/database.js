@@ -20,7 +20,7 @@ export class Database {
     //propriedade database que é um objeto vazio, é o estado inicial do banco de dados
     //o # faz ser prop privada impossivel de ser acessada livremente fora da classe Database
     //teste alteração
-    #database = {}; 
+    #database = {};
 
     //ao iniciar aplicação, precisamos recuperar os dados do arquivo db.json no formato do banco
     constructor() {
@@ -28,11 +28,11 @@ export class Database {
             // JSON.parse transforma o JSON em objeto
             this.#database = JSON.parse(data);
         })
-        .catch(() => {
-            //se não tiver nada no arquivo, vai criar um objeto vazio
-            this.#persist();
-        })
-        
+            .catch(() => {
+                //se não tiver nada no arquivo, vai criar um objeto vazio
+                this.#persist();
+            })
+
     }
 
     //aqui estou salvando as informações do banco de dados em um arquivo db.json
@@ -42,17 +42,17 @@ export class Database {
         fs.writeFile(databasePath, JSON.stringify(this.#database))
     }
 
-    select (table){
+    select(table) {
         //retorna ou a tabela, ou um array vazio
         const data = this.#database[table] || [];
 
         return data;
     }
 
-    insert (table, data){
+    insert(table, data) {
         // se já tem array da tabela (ex: tabela de usuários),
         // adiciona o dado no array
-        if (Array.isArray(this.#database[table])){
+        if (Array.isArray(this.#database[table])) {
             this.#database[table].push(data);
         } else {
             //se não tem array da tabela, cria um array com o
@@ -61,7 +61,29 @@ export class Database {
         }
 
         this.#persist();
-        
+
         return data;
+    }
+
+    delete(table, id) {
+        //sabemos que teremos um id porque na rota POST sempre geramos um UUID e salvamos no banco
+        const rowIndex = this.#database[table].findIndex(row => row.id === id)
+        console.log('row:', rowIndex) //retorna qual a posição do registro dentro do array de JSON USERS (database)
+
+        // só retorna de 0 para cima (menor posição do array de JSON USERS é 0)
+        if (rowIndex >= -1) {
+            /**
+             * O método splice() aceita de 1 a 4 parâmetros. O primeiro parâmetro é o índice de início,
+             * onde a operação de fatiamento (splice, em inglês) começa. O segundo parâmetro é opcional
+             * e representa o número de elementos a serem removidos. Se o segundo parâmetro for omitido,
+             * todos os elementos a partir do índice de início serão removidos.
+             
+             * Os parâmetros adicionais são opcionais e representam os novos elementos a serem adicionados
+             * ao array. Se um ou mais parâmetros adicionais forem fornecidos, os elementos existentes no
+             * array a partir do índice de início serão deslocados para o lado direito.
+             */
+            this.#database[table].splice(rowIndex, 1);
+            this.#persist();
+        }
     }
 }

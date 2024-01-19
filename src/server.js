@@ -90,7 +90,9 @@ const server = http.createServer(async (req, res) => {
         //o match() ao contrário do test() retorna um array com os parametros da url, retorna mais que true ou false
         const routeParams = req.url.match(route.path)
 
-        console.log(routeParams);
+        //cria um objeto com os parametros da url dentro da req contendo o id do user
+        //assim eu terei acesso ao id do user dentro do handler da rota DELETE ali no return
+        req.params = {...routeParams.groups};
 
         return route.handler(req, res);
     }

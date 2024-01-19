@@ -37,10 +37,12 @@ export const routes = [
     },
     {
         method: 'DELETE',
-        path: buildRoutePath('/users/:id'), //identificando recurso para deletar
+        path: buildRoutePath('/users/:id'), //identificando recurso para deletar - //retorna /^\/users\/(?<id>[a-z0-9-_]+)/
         handler: (req, res) => {
-            console.log(buildRoutePath('/users/:id')); //retorna /^\/users\/(?<id>[a-z0-9-_]+)/
-            return res.end();
+            const { id } = req.params; //pegando id do usuário que veio da requisição
+            database.delete('users', id);
+
+            return res.writeHead(204).end(); //204: deu certo mas não tem nada para retornar
         }
     }
 ]
