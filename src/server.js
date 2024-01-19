@@ -25,14 +25,11 @@
 
 import http from 'node:http';
 import { json } from './middlewares/json.js';
-import { Database } from './database.js';
-import { randomUUID } from 'node:crypto'; //módulo onde tenho ferramenta para gerar uuid
+import { routes } from './routes.js';
 //criando servidor e colocando para ouvir na porta localhost:3333
 //ao chamar esse endereço vai cair na função de callback
 //req : obtém informações de quem está mandando a requisição
 //res : devolve resposta para quem fez a requisição
-
-const database = new Database();
 
 //const users = [];
 
@@ -49,33 +46,18 @@ const server = http.createServer(async (req, res) => {
     */
     await json(req, res);
 
-    //isso aqui faz aparecer o "POST /users" no terminal 
-    console.log(method, url);
+    //filtro para encontrar a rota no routes.js
+    const route = routes.find(route => {
+        return route.method === method && route.path === url;
+    })
 
-    //JSON é variavel global do node
-    if (method === 'GET' && url === '/users') {
-        const users = database.select('users');
- 
-        return res
-            .end(JSON.stringify(users));
+    //se encontra a rota, executa o handler passando os parametros que ele precisa
+    //tudo com apenas um if
+    if (route) {
+        return route.handler(req, res);
     }
 
-    if (method === 'POST' && url === '/users') {
-        const { name, email } = req.body;
-
-        //cria objeto com os dados do usuário
-        const user = {
-            id: randomUUID(),
-            name, //to adicionando o nome que veio da requisição. é o mesmo que colocar name: name
-            email,
-        }
-
-        //cria uma chave "users" que vai ser um array de objetos com dados dos usuários
-        database.insert('users', user);
-
-        return res.writeHead(201).end('Usuário criado!');
-        //CRIOU algo com sucessso = 201. Usamos writeHead para escrever o cabeçalho da resposta
-    }
+    console.log(route);
 
     return res.writeHead(404).end(); //aqui eu tô falando pra tipo, se não cair em nenhuma das rotas (ifs) executar isso (404 - not found)
 })
