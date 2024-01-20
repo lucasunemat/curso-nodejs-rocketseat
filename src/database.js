@@ -42,9 +42,24 @@ export class Database {
         fs.writeFile(databasePath, JSON.stringify(this.#database))
     }
 
-    select(table) {
+    select(table, search) {
         //retorna ou a tabela, ou um array vazio
-        const data = this.#database[table] || [];
+        // ?? => se o que está antes for null ou undefined, retorna o que está depois
+        let data = this.#database[table] || [];
+
+        // efeito do Object.entries:
+        // { name: "Diego", email: "Diego" }
+        // [ ['name', 'Diego'],['email', 'Diego'] ]
+
+        // lembre que "data" é o array de objetos que é o BANCO DE DADOS
+        // row é cada usuário cadastrado no banco de dados
+        if (search) {
+            data = data.filter(row => {
+                return Object.entries(search).some(([key, value]) => {
+                    return row[key].toLowerCase().includes(value.toLowerCase()); //verificando se o valor do campo do usuário inclui o valor que eu quero buscar
+                })
+            })
+        }
 
         return data;
     }
@@ -69,7 +84,7 @@ export class Database {
         const rowIndex = this.#database[table].findIndex(row => row.id === id);
 
         if (rowIndex >= -1) {
-            this.#database[table][rowIndex] = {id, ...data}
+            this.#database[table][rowIndex] = { id, ...data }
             this.#persist();
         }
     }
