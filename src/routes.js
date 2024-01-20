@@ -10,7 +10,9 @@ export const routes = [
         path: buildRoutePath('/users'), //caminho para chamar a rota, é a url
         //funcao que será executada
         handler: (req, res) => {
-            const { search } = req.query; //search --> o valor é josias
+            const { search } = req.query; //search --> o valor é josias, ou qualquer que seja o valor do search
+            console.log("req.query: ", req.query);
+            console.log("search: ", search);
 
             const users = database.select('users', search ? { name: search, email: search } : null)
 

@@ -91,6 +91,8 @@ const server = http.createServer(async (req, res) => {
         //o match() ao contrário do test() retorna um array com os parametros da url, retorna mais que true ou false
         //retorna tudo o que deu match e mais informações
 
+        console.log(req.url.match(route.path))
+
         const routeParams = req.url.match(route.path);
         //console.log(extractQueryParams(routeParams.groups.query));
         //console.log(routeParams.groups);
@@ -101,7 +103,7 @@ const server = http.createServer(async (req, res) => {
 
         req.params = params; //resto dos groups tirando o query
         //digestão e transformação da query em objeto -- aqui basta colocar query porque extraí ela lá em cima. Se não existir query, retorna um objeto vazio
-        req.query = query ? extractQueryParams(query) : {}; 
+        req.query = query ? extractQueryParams(query) : {}; //aqui eu crio aquele objeto com chave e valor das querys
 
         //cria um objeto com os parametros da url dentro da req contendo o id do user
         //assim eu terei acesso ao id do user dentro do handler da rota DELETE ali no return

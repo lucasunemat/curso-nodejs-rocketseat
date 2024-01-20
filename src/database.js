@@ -54,6 +54,8 @@ export class Database {
         // lembre que "data" é o array de objetos que é o BANCO DE DADOS
         // row é cada usuário cadastrado no banco de dados
         if (search) {
+            console.log('var search dentro do select: ', search)
+            console.log('data: ', data);
             data = data.filter(row => {
                 return Object.entries(search).some(([key, value]) => {
                     return row[key].toLowerCase().includes(value.toLowerCase()); //verificando se o valor do campo do usuário inclui o valor que eu quero buscar

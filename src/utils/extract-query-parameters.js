@@ -12,6 +12,7 @@ export function extractQueryParams(query) {
      * queryParams = { search: 'Diego', order: 'desc' } --> após o reduce terminar
      */
     return query.substr(1).split('&').reduce((queryParams, param) => {
+        //aqui to chamando dinamicamente os atributos retornados do split de "key" e "value"
         const [key, value] = param.split('=')
 
         queryParams[key] = value
