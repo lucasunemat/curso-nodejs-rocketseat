@@ -1,1 +1,19 @@
-{"users":[{"id":"cc206ad1-46cb-45a5-aa54-91f6cf11b8ad","name":"aline de oliveira","email":"aline.oliveira@visonlux.com.br"},{"id":"6b08be6f-9b4a-4691-b5fc-599a78f46293","name":"talitha de oliveira","email":"talitha.oliveira@visonlux.com.br"},{"id":"dbf064ef-80b8-4d56-b73b-8fae338ae1f2","name":"heitor de oliveira","email":"heitor.oliveira@visonlux.com.br"}]}
+{
+    "users": [
+        {
+            "id": "e613e59b-00d8-4585-b7eb-82fa24f3d202",
+            "name": "john",
+            "email": "john@teste.com"
+        },
+        {
+            "id": "31e98442-eee7-48a1-8d6f-10629a9d178d",
+            "name": "john",
+            "email": "john@teste.com"
+        },
+        {
+            "id": "39593fd0-f6ee-4b69-830e-54965d384db9",
+            "name": "winy",
+            "email": "winy@teste.com"
+        }
+    ]
+}
