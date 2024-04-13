@@ -91,7 +91,7 @@ const server = http.createServer(async (req, res) => {
         //o match() ao contrário do test() retorna um array com os parametros da url, retorna mais que true ou false
         //retorna tudo o que deu match e mais informações
 
-        console.log(req.url.match(route.path))
+        //console.log(req.url.match(route.path))
 
         const routeParams = req.url.match(route.path);
         //console.log(extractQueryParams(routeParams.groups.query));
