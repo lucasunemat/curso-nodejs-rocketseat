@@ -8,7 +8,7 @@ export async function json(req, res) {
     }
 
     try {
-        //se tem body, cria uma var body e  converte para string e depois para json e joga na req.body
+        //se tem body, cria uma var body e converte para string e depois para json e joga na req.body
         req.body = JSON.parse(Buffer.concat(buffers).toString());
     } catch {
         //se não tem body, seta como null

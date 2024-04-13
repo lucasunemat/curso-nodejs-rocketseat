@@ -6,14 +6,14 @@
             "email": "john@teste.com"
         },
         {
-            "id": "31e98442-eee7-48a1-8d6f-10629a9d178d",
-            "name": "john",
-            "email": "john@teste.com"
-        },
-        {
             "id": "39593fd0-f6ee-4b69-830e-54965d384db9",
             "name": "winy",
             "email": "winy@teste.com"
+        },
+        {
+            "id": "48db3f7c-7c72-46c4-a66d-2e28e891ef06",
+            "name": "lucas",
+            "email": "lucas@teste.com"
         }
     ]
 }
