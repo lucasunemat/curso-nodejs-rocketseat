@@ -61,7 +61,17 @@ import { extractQueryParams } from './utils/extract-query-parameters.js';
 //res : devolve resposta para quem fez a requisição
 
 const server = http.createServer(async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+        // Permitir solicitações de qualquer origem
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        // Permitir solicitações com os métodos GET, POST, PUT, DELETE
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        // Permitir os cabeçalhos especificados
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    
+        // Se a solicitação for OPTIONS, responda com um status 200 OK
+        if (req.method === 'OPTIONS') {
+            return res.writeHead(200).end();
+        }
 
     const { method, url } = req; //desestruturando req e obtendo method e url dele
 
