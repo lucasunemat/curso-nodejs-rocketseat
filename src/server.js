@@ -118,27 +118,5 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(3333);
 
-/**
- * Para fins didaticos:
- * RouteParams:
-
-    [
-        '/users?search=josias&page=2',
-        '?search=josias&page=2',
-        'search=josias&page=2',
-        index: 0,
-        input: '/users?search=josias&page=2',
-        groups: [Object: null prototype] { query: '?search=josias&page=2' }
-    ]
-
- * RouteParams.groups:
-
-    [Object: null prototype] { query: '?search=josias&page=2' }
-
- * RouteParams.groups.query:
-
-    ?search=josias&page=2
-
- */
 
 
