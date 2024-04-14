@@ -61,6 +61,8 @@ import { extractQueryParams } from './utils/extract-query-parameters.js';
 //res : devolve resposta para quem fez a requisição
 
 const server = http.createServer(async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
     const { method, url } = req; //desestruturando req e obtendo method e url dele
 
     //console.log(url) --> url no caso do create é /users/
