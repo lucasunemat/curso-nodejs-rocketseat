@@ -20,6 +20,26 @@ export const routes = [
         }
     },
     {
+        method: 'GET',
+        // O caminho agora inclui um parâmetro de rota para o ID do usuário
+        path: buildRoutePath('/users/:id'), 
+        handler: (req, res) => {
+            // Extrai o parâmetro de rota ID da requisição
+            const { id } = req.params;
+
+            // Consulta o usuário pelo ID no banco de dados
+            const user = database.selectOne('users', { id });
+
+            if (!user) {
+                // Se o usuário não for encontrado, retorna um erro 404
+                return res.writeHead(404).end('Usuário não encontrado');
+            }
+
+            // Se o usuário for encontrado, retorna o usuário
+            return res.end(JSON.stringify(user));
+        }
+    },
+    {
         method: 'POST',
         path: buildRoutePath('/users'), // retorna /^\/users/ (a mesma coisa que o que foi enviado)
         handler: (req, res) => {

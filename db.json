@@ -1,1 +1,24 @@
-{"users":[{"id":"aa4ec983-32f7-4696-9823-a0cc5a7d714b","name":"teste","email":"lucasnunesb6@gmail.com"},{"id":"b42a51a5-9c34-4f96-a105-f3746711530a","name":"dfdf","email":"lucasnbatista51@gmail.com"}]}
+{
+    "users": [
+        {
+            "id": "4245bbcd-48dc-4aa7-9662-a038d565b88f",
+            "name": "winy",
+            "email": "teste@teste.com"
+        },
+        {
+            "id": "63dc6372-4206-40a6-af58-3e98f21b87bf",
+            "name": "lucas",
+            "email": "lucas@teste.com"
+        },
+        {
+            "id": "eee9fe46-1cfa-4efd-9350-3e88f8c68ff0",
+            "name": "julia",
+            "email": "julia@teste.com"
+        },
+        {
+            "id": "918253f3-2796-4457-931d-1e09b7e3ebfc",
+            "name": "irra",
+            "email": "teste@teste.com"
+        }
+    ]
+}

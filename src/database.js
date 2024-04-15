@@ -112,4 +112,31 @@ export class Database {
             this.#persist();
         }
     }
+
+    selectOne(table, search) {
+        // Obtém os dados da tabela especificada
+        const data = this.#database[table] || [];
+
+        // Se houver uma condição de busca, filtra os dados para encontrar apenas o primeiro que corresponde à busca
+        if (search) {
+            // Itera sobre os dados até encontrar o primeiro que corresponde à busca
+            for (const row of data) {
+                // Verifica se todas as propriedades da busca correspondem ao objeto atual
+                const isMatch = Object.entries(search).every(([key, value]) => {
+                    return row[key] === value;
+                });
+
+                // Se todos os critérios de busca forem atendidos, retorna o objeto atual
+                if (isMatch) {
+                    return row;
+                }
+            }
+
+            // Se nenhum objeto corresponder à busca, retorna null
+            return null;
+        } else {
+            // Se não houver condição de busca, retorna o primeiro objeto da tabela (se existir)
+            return data[0] || null;
+        }
+    }
 }
