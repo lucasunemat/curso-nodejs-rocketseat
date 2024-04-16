@@ -2,7 +2,7 @@
     "users": [
         {
             "id": "4245bbcd-48dc-4aa7-9662-a038d565b88f",
-            "name": "winy",
+            "name": "sei la",
             "email": "teste@teste.com"
         },
         {
@@ -24,6 +24,11 @@
             "id": "056ea7df-7bf8-40c0-9765-0039a1a667cb",
             "name": "batata",
             "email": "batata@batata.com"
+        },
+        {
+            "id": "84014131-1f77-4496-bb75-87c2a140d7cb",
+            "name": "lucas pinto",
+            "email": "lucas@teste.co"
         }
     ]
 }
