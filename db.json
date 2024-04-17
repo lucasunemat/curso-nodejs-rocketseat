@@ -1,14 +1,1 @@
-{
-    "users": [
-        {
-            "id": "4245bbcd-48dc-4aa7-9662-a038d565b88f",
-            "name": "sei la",
-            "email": "teste@teste.com"
-        },
-        {
-            "id": "63dc6372-4206-40a6-af58-3e98f21b87bf",
-            "name": "lucas souza pinto",
-            "email": "lucas@teste.com"
-        }
-    ]
-}
+{"users":[{"id":"4245bbcd-48dc-4aa7-9662-a038d565b88f","name":"sei la","email":"teste@teste.com"},{"id":"63dc6372-4206-40a6-af58-3e98f21b87bf","name":"lucas souza pinto","email":"lucas@teste.com"},{"id":"dd29a024-7ceb-4258-b6a2-f83d43209ea8","name":"teste","email":"teste@teste.com"},{"id":"1030c320-f52a-42dd-8df6-3ead7de0c341","name":"fff","email":"fff@fff.br"},{"id":"e12c637f-acce-4c23-9226-56372142d538","name":"asdadfadf","email":"adfasdf@unemat.br"}]}
