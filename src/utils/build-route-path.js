@@ -19,7 +19,7 @@ export function buildRoutePath(path) {
     const pathWithParams = path.replaceAll(routeParametersRegex, '(?<$1>[a-z0-9\-_]+)')
 
      //const teste2 = /\/users\/([a-z0-9\-_]+)/
-
+    // /users/:id
     // indica que o caminho da rota deve começar com o pathWithParams (ou seja, após /users/, deve ter um id)
     // essa parte relativa a ^${pathWithParams} é dizendo o que vai vir depois do /users/
     // ou seja, no final, vai concatenar /users/ com ^${pathWithParams}
